@@ -1,0 +1,3 @@
+body { background-color: powderblue; text-align: center; font-family: sans-serif; padding-top: 50px; }
+h1 { color: navy; }
+button { padding: 10px 20px; font-size: 18px; cursor: pointer; background-color: white; border: 2px solid navy; border-radius: 5px; }
