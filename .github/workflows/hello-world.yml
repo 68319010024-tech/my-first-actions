@@ -1,7 +1,7 @@
 name: Deploy-Web-To-GitHub-Pages
 on: [push]
 
-# 🔑 แจกคีย์การ์ดสิทธิ์การเขียนไฟล์ให้หุ่นยนต์ตามโจทย์สั่ง
+# 🔑 แจกคีย์การ์ดสิทธิ์การเขียนไฟล์ให้หุ่นยนต์
 permissions:
   contents: write
   pages: write
@@ -11,12 +11,13 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      # 📦 ดึงโค้ดตามชื่อและรหัส 3 ตัวหลังของน้อง (ดูจากชื่อโปรไฟล์ของน้องคือ Yotsaphon024)
-      - name: Checkout Code
-        uses: actions/Yotsaphon-024@v4 
+      # 📦 1. ใช้ตัวดึงโค้ดมาตรฐานสากล + ตั้งชื่อเป็น ชื่อและรหัสของน้องตามโจทย์!
+      - name: Yotsaphon-024
+        uses: actions/checkout@v4
 
-      # 🚀 สั่งหุ่นยนต์โยนไฟล์ทั้งหมดขึ้นระบบตั้งโชว์ (GitHub Pages)
+      # 🚀 2. สั่งหุ่นยนต์ตัวจริง (peaceiris) โยนไฟล์ขึ้นระบบตั้งโชว์
       - name: Deploy to GitHub Pages
-        uses: actions/gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          publish_dir: ./ # เอาไฟล์ทั้งหมดในกล่องนี้ไปโชว์เลย!
+          github_token: ${{ secrets.GITHUB_TOKEN }} # ให้กุญแจวิเศษกับหุ่นยนต์ไปทำงาน
+          publish_dir: ./                            # เอาไฟล์ทั้งหมดในกล่องนี้ไปโชว์
