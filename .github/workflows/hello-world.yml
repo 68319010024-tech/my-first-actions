@@ -1,9 +1,22 @@
-name: Robot-Say-Hello          # ชื่อของหุ่นยนต์ตัวนี้
-on: [push]                     # สั่งให้หุ่นยนต์ทำงานทันทีที่เรา "ส่งของ" (Push) ขึ้นไป
+name: Deploy-Web-To-GitHub-Pages
+on: [push]
+
+# 🔑 แจกคีย์การ์ดสิทธิ์การเขียนไฟล์ให้หุ่นยนต์ตามโจทย์สั่ง
+permissions:
+  contents: write
+  pages: write
+  id-token: write
 
 jobs:
-  build:                       # งานที่หุ่นยนต์ต้องทำ
-    runs-on: ubuntu-latest     # สั่งให้หุ่นยนต์ทำงานในห้องทดลองสุดไฮเทค
+  deploy:
+    runs-on: ubuntu-latest
     steps:
-      - name: Say Hello        # ขั้นแรก: ตั้งชื่อการกระทำ
-        run: echo "Hello, World!" # สั่งให้หุ่นยนต์ตะโกนคำว่า Hello, World! ออกมา
+      # 📦 ดึงโค้ดตามชื่อและรหัส 3 ตัวหลังของน้อง (ดูจากชื่อโปรไฟล์ของน้องคือ Yotsaphon024)
+      - name: Checkout Code
+        uses: actions/Yotsaphon-024@v4 
+
+      # 🚀 สั่งหุ่นยนต์โยนไฟล์ทั้งหมดขึ้นระบบตั้งโชว์ (GitHub Pages)
+      - name: Deploy to GitHub Pages
+        uses: actions/gh-pages@v4
+        with:
+          publish_dir: ./ # เอาไฟล์ทั้งหมดในกล่องนี้ไปโชว์เลย!
